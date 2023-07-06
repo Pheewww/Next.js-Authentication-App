@@ -4,7 +4,8 @@ import React, {useEffect} from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-
+import {Stack,Box, Button, IconButton,Typography, TextField} from '@mui/material'
+import SendIcon from '@mui/icons-material/Send';
 
 
 
@@ -44,32 +45,53 @@ export default function LoginPage() {
     }, [user]);
 
     return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+
+        <div>
+         <Stack spacing={2} direction='column'>
+
+
+         <div className="flex flex-col items-center justify-center min-h-screen py-2">
         <h1>{loading ? "Processing" : "Login"}</h1>
         <hr />
-        
-        <label htmlFor="email">email</label>
-        <input 
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-            id="email"
+
+
+<Stack spacing={4} direction='column' >
+<TextField   label = 'Email' variant = 'standard'   id="email"
             type="text"
             value={user.email}
-            onChange={(e) => setUser({...user, email: e.target.value})}
-            placeholder="email"
-            />
-        <label htmlFor="password">password</label>
-        <input 
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-            id="password"
+            onChange={(e) => setUser({...user, email: e.target.value})}><Typography gutterbottom = 'true' variant="h6" component="h2">
+    <label htmlFor="email">Email</label>
+</Typography>
+</TextField>
+        
+      
+
+            <TextField   label = 'Password' variant = 'standard'   id="password"
             type="password"
             value={user.password}
-            onChange={(e) => setUser({...user, password: e.target.value})}
-            placeholder="password"
-            />
-            <button
-            onClick={onLogin}
-            className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600">Login here</button>
-            <Link href="/signup">Visit Signup page</Link>
+            onChange={(e) => setUser({...user, password: e.target.value})}><Typography gutterbottom = 'true' variant="h6" component="h2">
+    <label htmlFor="password">Password</label>
+</Typography>
+</TextField>
+
+
+            <Button
+       onClick={onLogin}
+        disabled={buttonDisabled}
+        variant="contained"
+        className="mb-4"
+         style={{ backgroundColor: "blue", color: "white" }}
+      >
+        Login Here
+      </Button>
+       
+        
+      <Button variant ="outlined" href="/signup"  startIcon={<SendIcon/>}
+            >Visit Signup page</Button></Stack>
+            </div>
+
+
+             </Stack>
         </div>
     )
 

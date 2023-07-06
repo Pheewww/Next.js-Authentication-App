@@ -4,6 +4,10 @@ import React, { useEffect } from "react";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import {Stack,Box, Button, IconButton,Typography, TextField} from '@mui/material'
+import SendIcon from '@mui/icons-material/Send';
+
+
 
 
 
@@ -44,41 +48,80 @@ export default function SignupPage() {
 
 
     return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+   
+
+
+        
+        <div>
+                <Box >
+        <Stack spacing={2} direction='column'>
+             <div className="flex flex-col items-center justify-center min-h-screen py-2">
         <h1>{loading ? "Processing" : "Signup"}</h1>
         <hr />
-        <label htmlFor="username">username</label>
-        <input 
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-            id="username"
-            type="text"
-            value={user.username}
-            onChange={(e) => setUser({...user, username: e.target.value})}
-            placeholder="username"
-            />
-        <label htmlFor="email">email</label>
-        <input 
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-            id="email"
+            <Stack spacing={4} direction='column' >
+                  <TextField  id="username" label = 'Username' variant = 'standard'  type = 'text' value={user.username}
+            onChange={(e) => setUser({...user, username: e.target.value})}><Typography gutterbottom = 'true' variant="h6" component="h2">
+    <label htmlFor="username">Username</label>
+</Typography></TextField>
+        
+       
+      
+             
+      <TextField gutterbottom label = 'Email' variant = 'standard' id="email"
             type="text"
             value={user.email}
-            onChange={(e) => setUser({...user, email: e.target.value})}
-            placeholder="email"
-            />
-        <label htmlFor="password">password</label>
-        <input 
-        className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black"
-            id="password"
+            onChange={(e) => setUser({...user, email: e.target.value})}><Typography variant="h6" component="h2">
+    <label htmlFor="email">Email</label>
+</Typography></TextField>
+       
+            
+<TextField gutterbottom label = 'Password' variant = 'standard' id="password"
             type="password"
             value={user.password}
-            onChange={(e) => setUser({...user, password: e.target.value})}
-            placeholder="password"
-            />
-            <button
-            onClick={onSignup}
-            className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600">{buttonDisabled ? "No signup" : "Signup"}</button>
-            <Link href="/login">Visit login page</Link>
+            onChange={(e) => setUser({...user, password: e.target.value})}>
+                <Typography 
+                variant="h6"
+                 component="h2">
+
+  <label htmlFor="password">Password</label>
+
+</Typography>
+</TextField>
+<Button
+        onClick={onSignup}
+        disabled={buttonDisabled}
+        variant="contained"
+        className="mb-4"
+         style={{ backgroundColor: "blue", color: "white" }}
+      >
+        {loading ? "Processing" : "Signup"}
+      </Button>
+       
+        
+      <Button variant ="outlined" href="/login"  startIcon={<SendIcon/>}
+            >Visit login page</Button></Stack>
+            </div>
+            </Stack>
+         
+       
+</Box> 
         </div>
+        
     )
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
